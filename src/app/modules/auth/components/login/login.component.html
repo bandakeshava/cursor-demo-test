@@ -1,0 +1,40 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-4 text-center">Welcome back</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" type="email" class="form-control" [class.is-invalid]="loginForm.controls['email'].touched && loginForm.controls['email'].invalid" formControlName="email" placeholder="you@example.com" />
+              <div class="invalid-feedback" *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
+                <span *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</span>
+                <span *ngIf="loginForm.controls['email'].errors?.['email']">Enter a valid email.</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" type="password" class="form-control" [class.is-invalid]="loginForm.controls['password'].touched && loginForm.controls['password'].invalid" formControlName="password" placeholder="••••••" />
+              <div class="invalid-feedback" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                <span *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</span>
+                <span *ngIf="loginForm.controls['password'].errors?.['minlength']">Min 6 characters.</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting() || loginForm.invalid">
+              <span *ngIf="!isSubmitting()">Login</span>
+              <span *ngIf="isSubmitting()" class="d-inline-flex align-items-center justify-content-center gap-2">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Signing in…
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

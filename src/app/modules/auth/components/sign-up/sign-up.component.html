@@ -1,0 +1,49 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-4 text-center">Create your account</h2>
+          <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" type="text" class="form-control" [class.is-invalid]="signUpForm.controls['name'].touched && signUpForm.controls['name'].invalid" formControlName="name" placeholder="Jane Doe" />
+              <div class="invalid-feedback" *ngIf="signUpForm.controls['name'].touched && signUpForm.controls['name'].invalid">
+                <span *ngIf="signUpForm.controls['name'].errors?.['required']">Name is required.</span>
+                <span *ngIf="signUpForm.controls['name'].errors?.['minlength']">Min 2 characters.</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" type="email" class="form-control" [class.is-invalid]="signUpForm.controls['email'].touched && signUpForm.controls['email'].invalid" formControlName="email" placeholder="you@example.com" />
+              <div class="invalid-feedback" *ngIf="signUpForm.controls['email'].touched && signUpForm.controls['email'].invalid">
+                <span *ngIf="signUpForm.controls['email'].errors?.['required']">Email is required.</span>
+                <span *ngIf="signUpForm.controls['email'].errors?.['email']">Enter a valid email.</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" type="password" class="form-control" [class.is-invalid]="signUpForm.controls['password'].touched && signUpForm.controls['password'].invalid" formControlName="password" placeholder="••••••" />
+              <div class="invalid-feedback" *ngIf="signUpForm.controls['password'].touched && signUpForm.controls['password'].invalid">
+                <span *ngIf="signUpForm.controls['password'].errors?.['required']">Password is required.</span>
+                <span *ngIf="signUpForm.controls['password'].errors?.['minlength']">Min 6 characters.</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting() || signUpForm.invalid">
+              <span *ngIf="!isSubmitting()">Sign up</span>
+              <span *ngIf="isSubmitting()" class="d-inline-flex align-items-center justify-content-center gap-2">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Creating…
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
